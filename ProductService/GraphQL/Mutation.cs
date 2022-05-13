@@ -13,8 +13,6 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using ProductService.Models;
-using ProductQL.GraphQL;
-using ProductQL.Models;
 
 namespace ProductService.GraphQL
 {
