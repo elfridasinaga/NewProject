@@ -1,4 +1,4 @@
-﻿namespace ProductQL.Models
+﻿namespace ProductService.Models
 {
     public class TokenSettings
     {
