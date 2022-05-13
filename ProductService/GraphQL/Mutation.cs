@@ -12,14 +12,12 @@ using HotChocolate.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using ProductQL.Models;
-using ProductService.Models;
 
 namespace ProductQL.GraphQL
 {
     public class Mutation
     {
-        [Authorize(Roles = new[] { "MANAGER" })]
+        /*[Authorize(Roles = new[] { "MANAGER" })]
         public async Task<Product> AddProductAsync(
             ProductInput input,
             [Service] StudyCaseContext context)
@@ -170,7 +168,7 @@ namespace ProductQL.GraphQL
             }
 
             return await Task.FromResult(new UserToken(null, null, Message: "Username or password was invalid"));
-        }
+        }*/
 
         /*[Authorize]
         public async Task<OrderData> AddOrderAsync(
