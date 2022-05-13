@@ -40,6 +40,10 @@ services:
 
   orderservice:
     image: ${DOCKER_REGISTRY-}orderservice
+    ports:
+      - "8083:80"
+    links:
+      - "kafka"
     build:
       context: .
       dockerfile: OrderService/Dockerfile
@@ -49,6 +53,8 @@ services:
 
   productservice:
     image: ${DOCKER_REGISTRY-}productservice
+    ports:
+      - "8084:80"
     build:
       context: .
       dockerfile: ProductService/Dockerfile
@@ -58,6 +64,8 @@ services:
 
   userservice:
     image: ${DOCKER_REGISTRY-}userservice
+    ports:
+      - "8085:80"
     build:
       context: .
       dockerfile: ServiceUser/Dockerfile
