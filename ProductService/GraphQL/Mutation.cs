@@ -12,17 +12,20 @@ using HotChocolate.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using ProductService.Models;
+using ProductQL.GraphQL;
+using ProductQL.Models;
 
-namespace ProductQL.GraphQL
+namespace ProductService.GraphQL
 {
     public class Mutation
     {
-        /*[Authorize(Roles = new[] { "MANAGER" })]
+        [Authorize(Roles = new[] { "MANAGER" })]
         public async Task<Product> AddProductAsync(
             ProductInput input,
             [Service] StudyCaseContext context)
         {
-            
+
             // EF
             var product = new Product
             {
@@ -41,7 +44,7 @@ namespace ProductQL.GraphQL
             int id,
             [Service] StudyCaseContext context)
         {
-            var product = context.Products.Where(o => o.Id ==id).FirstOrDefault();
+            var product = context.Products.Where(o => o.Id == id).FirstOrDefault();
 
             return await Task.FromResult(product);
         }
@@ -65,7 +68,7 @@ namespace ProductQL.GraphQL
             return await Task.FromResult(product);
         }
 
-        [Authorize(Roles = new[] {"MANAGER"})]
+        [Authorize(Roles = new[] { "MANAGER" })]
         public async Task<Product> DeleteProductByIdAsync(
             int id,
             [Service] StudyCaseContext context)
@@ -85,8 +88,8 @@ namespace ProductQL.GraphQL
             RegisterUser input,
             [Service] StudyCaseContext context)
         {
-            var user = context.Users.Where(o=>o.Username == input.UserName).FirstOrDefault();
-            if(user != null)
+            var user = context.Users.Where(o => o.Username == input.UserName).FirstOrDefault();
+            if (user != null)
             {
                 throw new Exception("Username Already Exist");
                 //return await Task.FromResult(new UserData());
@@ -114,11 +117,12 @@ namespace ProductQL.GraphQL
             var ret = context.Users.Add(newUser);
             await context.SaveChangesAsync();
 
-            return await Task.FromResult(new UserData { 
-                Id=newUser.Id,
-                Username=newUser.Username,
-                Email =newUser.Email,
-                FullName=newUser.FullName
+            return await Task.FromResult(new UserData
+            {
+                Id = newUser.Id,
+                Username = newUser.Username,
+                Email = newUser.Email,
+                FullName = newUser.FullName
             });
         }
         public async Task<UserToken> LoginAsync(
@@ -129,9 +133,9 @@ namespace ProductQL.GraphQL
             var user = context.Users.Where(o => o.Username == input.Username).FirstOrDefault();
             if (user == null)
             {
-                return await Task.FromResult(new UserToken(null,null,"Username or password was invalid"));
+                return await Task.FromResult(new UserToken(null, null, "Username or password was invalid"));
             }
-            bool valid = BCrypt.Net.BCrypt.Verify(input.Password,user.Password);
+            bool valid = BCrypt.Net.BCrypt.Verify(input.Password, user.Password);
             if (valid)
             {
                 // generate jwt token
@@ -145,8 +149,8 @@ namespace ProductQL.GraphQL
                 var userRoles = context.UserRoles.Where(o => o.Id == user.Id).ToList();
                 foreach (var userRole in userRoles)
                 {
-                    var role = context.Roles.Where(o=>o.Id == userRole.RoleId).FirstOrDefault();
-                    if(role!=null)
+                    var role = context.Roles.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
+                    if (role != null)
                     {
                         claims.Add(new Claim(ClaimTypes.Role, role.Name));
                     }
@@ -156,7 +160,7 @@ namespace ProductQL.GraphQL
                 var jwtToken = new JwtSecurityToken(
                     issuer: tokenSettings.Value.Issuer,
                     audience: tokenSettings.Value.Audience,
-                    expires: expired,   
+                    expires: expired,
                     claims: claims, // jwt payload
                     signingCredentials: credentials // signature
                 );
@@ -168,58 +172,9 @@ namespace ProductQL.GraphQL
             }
 
             return await Task.FromResult(new UserToken(null, null, Message: "Username or password was invalid"));
-        }*/
+        }
 
-        /*[Authorize]
-        public async Task<OrderData> AddOrderAsync(
-            OrderData input,
-            ClaimsPrincipal claimsPrincipal,
-            [Service] StudyCaseContext context)
-        {
-            using var transaction = context.Database.BeginTransaction();
-            var userName = claimsPrincipal.Identity.Name;
-
-            try
-            {
-                var user = context.Users.Where(o => o.Username == userName).FirstOrDefault();
-                if (user != null)
-                {
-                    // EF
-                    var order = new Order
-                    {
-                        Code = Guid.NewGuid().ToString(), // generate random chars using GUID
-                        UserId = user.Id
-                    };
-                                     
-                    foreach (var item in input.Details)
-                    {
-                        var detial = new OrderDetail
-                        {
-                            OrderId = order.Id,
-                            ProductId = item.ProductId,
-                            Quantity = item.Quantity
-                        };
-                        order.OrderDetails.Add(detial);            
-                    }
-                    context.Orders.Add(order);
-                    context.SaveChanges();
-                    await transaction.CommitAsync();
-
-                    input.Id = order.Id;
-                    input.Code = order.Code;
-                }
-                else
-                    throw new Exception("user was not found");
-            }
-            catch(Exception err)
-            {
-                transaction.Rollback();
-            }
-
-
-
-            return input;
-        }*/
+        
 
     }
 }
