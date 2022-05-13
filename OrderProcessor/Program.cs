@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-/*using Confluent.Kafka;
+using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
 using OrderProcessor.Models;
 
@@ -12,7 +12,7 @@ var config = new ConsumerConfig
     BootstrapServers = configuration.GetSection("KafkaSettings").GetSection("Server").Value,
     GroupId = "tester",
     AutoOffsetReset = AutoOffsetReset.Earliest
-};*/
+};
 
 var topic = "simpleorder";
 CancellationTokenSource cts = new CancellationTokenSource();
@@ -22,7 +22,7 @@ Console.CancelKeyPress += (_, e) =>
     cts.Cancel();
 };
 
-/*using (var consumer = new ConsumerBuilder<string, string>(config).Build())
+using (var consumer = new ConsumerBuilder<string, string>(config).Build())
 {
     Console.WriteLine("Connected");
     consumer.Subscribe(topic);
@@ -54,4 +54,4 @@ Console.CancelKeyPress += (_, e) =>
     {
         consumer.Close();
     }
-}*/
+}

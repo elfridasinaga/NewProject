@@ -12,7 +12,7 @@ namespace OrderService.Models
 
         public int Id { get; set; }
         public string OrderCode { get; set; } = null!;
-        public string OrderContent { get; set; } = null!;
+        public int OrderContent { get; set; }
         public DateTime Created { get; set; }
 
         public virtual User OrderContentNavigation { get; set; } = null!;

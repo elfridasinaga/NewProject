@@ -45,10 +45,6 @@ namespace OrderService.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.OrderContent)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.OrderContentNavigation)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.OrderContent)
@@ -104,10 +100,6 @@ namespace OrderService.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Profiles)
                     .HasForeignKey(d => d.UserId)
@@ -128,9 +120,7 @@ namespace OrderService.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
@@ -150,10 +140,6 @@ namespace OrderService.Models
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.ToTable("UserRole");
-
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.UserRoles)

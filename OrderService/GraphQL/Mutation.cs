@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace GraphQLAPI.GraphQL
+namespace OrderService.GraphQL
 {
     public class Mutation
     {

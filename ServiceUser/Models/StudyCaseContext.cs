@@ -26,11 +26,11 @@ namespace UserService.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            /*if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-V0TB2P3\\SQLEXPRESS;Database=StudyCase;uid=tester;pwd=pass123;");
-            }
+            }*/
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,10 +42,6 @@ namespace UserService.Models
                 entity.Property(e => e.Created).HasColumnType("datetime");
 
                 entity.Property(e => e.OrderCode)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OrderContent)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -104,10 +100,6 @@ namespace UserService.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Profiles)
                     .HasForeignKey(d => d.UserId)
@@ -128,9 +120,7 @@ namespace UserService.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
@@ -150,10 +140,6 @@ namespace UserService.Models
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.ToTable("UserRole");
-
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.UserRoles)

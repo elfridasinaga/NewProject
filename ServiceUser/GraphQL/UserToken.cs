@@ -1,4 +1,4 @@
-﻿namespace ProductQL.GraphQL
+﻿namespace UserService.GraphQL
 {
     public record UserToken
     (

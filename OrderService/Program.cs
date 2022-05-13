@@ -1,5 +1,6 @@
-using GraphQLAPI.GraphQL;
+
 using Microsoft.EntityFrameworkCore;
+using OrderService.GraphQL;
 using OrderService.Models;
 
 var builder = WebApplication.CreateBuilder(args);

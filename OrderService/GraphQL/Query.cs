@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using OrderService.Models;
 
-namespace GraphQLAPI.GraphQL
+namespace OrderService.GraphQL
 {
     public class Query
     {

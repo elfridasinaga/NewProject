@@ -1,4 +1,4 @@
-﻿namespace GraphQLAPI.GraphQL
+﻿namespace OrderService.GraphQL
 {
     public class OrderData
     {
