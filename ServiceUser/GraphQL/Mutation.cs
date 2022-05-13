@@ -18,70 +18,6 @@ namespace UserService.GraphQL
 {
     public class Mutation
     {
-        [Authorize(Roles = new[] { "ADMIN", "MANAGER" })]
-        public async Task<Product> AddProductAsync(
-            ProductInput input,
-            [Service] StudyCaseContext context)
-        {
-
-            // EF
-            var product = new Product
-            {
-                Name = input.Name,
-                Stock = input.Stock,
-                Price = input.Price,
-                Created = DateTime.Now
-            };
-
-            var ret = context.Products.Add(product);
-            await context.SaveChangesAsync();
-
-            return ret.Entity;
-        }
-        public async Task<Product> GetProductByIdAsync(
-            int id,
-            [Service] StudyCaseContext context)
-        {
-            var product = context.Products.Where(o => o.Id == id).FirstOrDefault();
-
-            return await Task.FromResult(product);
-        }
-        [Authorize(Roles = new[] { "ADMIN", "MANAGER" })]
-        public async Task<Product> UpdateProductAsync(
-            ProductInput input,
-            [Service] StudyCaseContext context)
-        {
-            var product = context.Products.Where(o => o.Id == input.Id).FirstOrDefault();
-            if (product != null)
-            {
-                product.Name = input.Name;
-                product.Stock = input.Stock;
-                product.Price = input.Price;
-
-                context.Products.Update(product);
-                await context.SaveChangesAsync();
-            }
-
-
-            return await Task.FromResult(product);
-        }
-
-        [Authorize(Roles = new[] { "ADMIN" })]
-        public async Task<Product> DeleteProductByIdAsync(
-            int id,
-            [Service] StudyCaseContext context)
-        {
-            var product = context.Products.Where(o => o.Id == id).FirstOrDefault();
-            if (product != null)
-            {
-                context.Products.Remove(product);
-                await context.SaveChangesAsync();
-            }
-
-
-            return await Task.FromResult(product);
-        }
-
         public async Task<UserData> RegisterUserAsync(
             RegisterUser input,
             [Service] StudyCaseContext context)
@@ -132,7 +68,7 @@ namespace UserService.GraphQL
                 var claims = new List<Claim>();
                 claims.Add(new Claim(ClaimTypes.Name, user.Username));
 
-                var userRoles = context.UserRoles.Where(o => o.Id == user.Id).ToList();
+                var userRoles = context.UserRoles.Where(o => o.UserId == user.Id).ToList();
                 foreach (var userRole in userRoles)
                 {
                     var role = context.Roles.Where(o => o.Id == userRole.RoleId).FirstOrDefault();

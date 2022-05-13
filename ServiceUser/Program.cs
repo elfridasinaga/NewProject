@@ -39,17 +39,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
     });
 
-// cors
-/*builder.Services.AddCors(oprion =>
-{
-    oprion.AddPolicy("allowOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
-
-
-});*/
-
 var app = builder.Build();
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapGraphQL();
