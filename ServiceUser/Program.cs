@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using OrderProcessor.Models;
-using ProductQL.GraphQL;
-using ProductQL.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var conString = builder.Configuration.GetConnectionString("MyDatabase");
+/*var conString = builder.Configuration.GetConnectionString("MyDatabase");
 builder.Services.AddDbContext<StudyCaseContext>(options =>
      options.UseSqlServer(conString)
 );
@@ -38,7 +35,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true
         };
 
-    });
+    });*/
 
 // cors
 /*builder.Services.AddCors(oprion =>

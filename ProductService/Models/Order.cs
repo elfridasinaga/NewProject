@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UserService.Models
+namespace ProductService.Models
 {
-    public partial class Product
+    public partial class Order
     {
-        public Product()
+        public Order()
         {
             OrderDetails = new HashSet<OrderDetail>();
         }
 
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public int Stock { get; set; }
-        public double Price { get; set; }
+        public string OrderCode { get; set; } = null!;
+        public string OrderContent { get; set; } = null!;
         public DateTime Created { get; set; }
 
+        public virtual User OrderContentNavigation { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

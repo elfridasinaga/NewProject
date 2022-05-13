@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OrderProcessor.Models
+namespace UserService.Models
 {
     public partial class Order
     {
@@ -11,10 +11,11 @@ namespace OrderProcessor.Models
         }
 
         public int Id { get; set; }
-        public string Code { get; set; } = null!;
-        public int UserId { get; set; }
+        public string OrderCode { get; set; } = null!;
+        public string OrderContent { get; set; } = null!;
+        public DateTime Created { get; set; }
 
-        public virtual User User { get; set; } = null!;
+        public virtual User OrderContentNavigation { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
