@@ -13,6 +13,8 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using ProductService.Models;
+using OrderProcessor.GraphQL;
+using UserService.Models;
 
 namespace ProductService.GraphQL
 {
@@ -172,7 +174,7 @@ namespace ProductService.GraphQL
             return await Task.FromResult(new UserToken(null, null, Message: "Username or password was invalid"));
         }
 
-        
+
 
     }
 }

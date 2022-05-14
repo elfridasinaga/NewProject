@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using ProductService.GraphQL;
 using ProductService.Models;
 using System.Text;
+using UserService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var conString = builder.Configuration.GetConnectionString("MyDatabase");

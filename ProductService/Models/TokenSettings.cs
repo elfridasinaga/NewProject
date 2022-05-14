@@ -1,4 +1,4 @@
-﻿namespace ProductService.Models
+﻿namespace UserService.Models
 {
     public class TokenSettings
     {

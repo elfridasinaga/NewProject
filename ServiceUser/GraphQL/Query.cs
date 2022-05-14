@@ -9,12 +9,13 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using UserService.Models;
+using OrderProcessor.GraphQL;
 
 namespace UserService.GraphQL
 {
     public class Query
     {
-        [Authorize] // dapat diakses kalau sudah login
+        [Authorize(Roles = new[] { "MANAGER" })] // dapat diakses kalau sudah login
         public IQueryable<UserData> GetUsers([Service] StudyCaseContext context) =>
             context.Users.Select(p => new UserData()
             {

@@ -8,7 +8,6 @@ namespace OrderProcessor.Models
         public User()
         {
             Orders = new HashSet<Order>();
-            Profiles = new HashSet<Profile>();
             UserRoles = new HashSet<UserRole>();
         }
 
@@ -19,7 +18,6 @@ namespace OrderProcessor.Models
         public string Password { get; set; } = null!;
 
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Profile> Profiles { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

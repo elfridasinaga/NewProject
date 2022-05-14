@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using ProductService.Models;
+using OrderProcessor.GraphQL;
 
 namespace ProductService.GraphQL
 {
@@ -28,28 +29,8 @@ namespace ProductService.GraphQL
                 Username = p.Username
             });
 
-        [Authorize]
-        public IQueryable<Profile> GetProfiles([Service] StudyCaseContext context, ClaimsPrincipal claimsPrincipal)
-        {
-            var userName = claimsPrincipal.Identity.Name;
-
-            // check admin role ?
-            var adminRole = claimsPrincipal.Claims.Where(o => o.Type == ClaimTypes.Role && o.Value == "ADMIN").FirstOrDefault();
-            var user = context.Users.Where(o => o.Username == userName).FirstOrDefault();
-            if (user != null)
-            {
-                if (adminRole != null)
-                {
-                    return context.Profiles;
-                }
-                var profiles = context.Profiles.Where(o => o.UserId == user.Id);
-                return profiles.AsQueryable();
-            }
-
-
-            return new List<Profile>().AsQueryable();
-        }
         
+
 
     }
 }

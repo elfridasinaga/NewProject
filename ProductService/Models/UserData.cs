@@ -1,4 +1,4 @@
-﻿namespace ProductService.GraphQL
+﻿namespace OrderProcessor.GraphQL
 {
 
     public partial class UserData

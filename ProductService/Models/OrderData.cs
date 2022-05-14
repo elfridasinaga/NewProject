@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProductService.Models
+namespace OrderProcessor.Models
 {
     public class OrderData
     {
@@ -11,7 +11,7 @@ namespace ProductService.Models
         public string? Code { get; set; }
         public int? UserId { get; set; }
 
-        public List<OrderDetailData> Details { get; set; }
+        
 
     }
 }

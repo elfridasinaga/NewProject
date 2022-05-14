@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace OrderProcessor.Models
 {
     public partial class StudyCaseContext : DbContext
     {
-        private readonly string _conString;
         public StudyCaseContext()
         {
-            IConfiguration configuration = new ConfigurationBuilder()
-                  .AddJsonFile("appsettings.json", true, true)
-                  .Build();
-
-            _conString = configuration.GetConnectionString("MyDatabase");
         }
 
         public StudyCaseContext(DbContextOptions<StudyCaseContext> options)
@@ -24,9 +17,7 @@ namespace OrderProcessor.Models
         }
 
         public virtual DbSet<Order> Orders { get; set; } = null!;
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
-        public virtual DbSet<Profile> Profiles { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
@@ -52,28 +43,15 @@ namespace OrderProcessor.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.OrderContentNavigation)
+                entity.Property(e => e.OrderContent)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.OrderContent)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_User");
-            });
-
-            modelBuilder.Entity<OrderDetail>(entity =>
-            {
-                entity.ToTable("OrderDetail");
-
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetail_Order");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetail_Product");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -85,33 +63,6 @@ namespace OrderProcessor.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Profile>(entity =>
-            {
-                entity.ToTable("Profile");
-
-                entity.Property(e => e.Address)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.City)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Profiles)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Profile_User");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -126,8 +77,6 @@ namespace OrderProcessor.Models
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)

@@ -18,6 +18,12 @@ builder.Services
     .AddQueryType<Query>()
     .AddMutationType<Mutation>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("allowedOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+}
+);
+
 var app = builder.Build();
 
 app.MapGraphQL();

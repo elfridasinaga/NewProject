@@ -57,7 +57,7 @@ public class KafkaHelper
                     succeed = true;
                 }
             });
-            producer.Flush(TimeSpan.FromSeconds(10));
+            producer.Flush(TimeSpan.FromSeconds(20));
         }
 
         return await Task.FromResult(succeed);
