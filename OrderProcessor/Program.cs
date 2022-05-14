@@ -1,11 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Confluent.Kafka;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using OrderProcessor.Models;
 
+Console.WriteLine("Order Processor");
 IConfiguration configuration = new ConfigurationBuilder()
-      .AddJsonFile("appsettings.json", true, true)
-      .Build();
+    .AddJsonFile("appsettings.json", true, true)
+    .Build();
 
 var config = new ConsumerConfig
 {
@@ -14,36 +16,40 @@ var config = new ConsumerConfig
     AutoOffsetReset = AutoOffsetReset.Earliest
 };
 
+//Connect to Kafka
 var topic = "simpleorder";
 CancellationTokenSource cts = new CancellationTokenSource();
 Console.CancelKeyPress += (_, e) =>
 {
-    e.Cancel = true; // prevent the process from terminating.
+    e.Cancel = true;
     cts.Cancel();
 };
 
 using (var consumer = new ConsumerBuilder<string, string>(config).Build())
 {
+
     Console.WriteLine("Connected");
     consumer.Subscribe(topic);
     try
     {
         while (true)
         {
-            var cr = consumer.Consume(cts.Token); // blocking
+            var cr = consumer.Consume(cts.Token);
             Console.WriteLine($"Consumed record with key: {cr.Message.Key} and value: {cr.Message.Value}");
 
             // EF
             using (var context = new StudyCaseContext())
             {
-                Order order = new Order();
+                Order order = JsonConvert.DeserializeObject<Order>(cr.Message.Value);
                 order.OrderCode = cr.Message.Key;
                 order.Created = DateTime.Now;
                 order.OrderContent = cr.Message.Value;
 
                 context.Orders.Add(order);
                 context.SaveChanges();
+                Console.WriteLine("Order Submitted");
             }
+
         }
     }
     catch (OperationCanceledException)
