@@ -1,12 +1,11 @@
 version: '3.4'
 
 services:
-  orderservice:
+  userservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
-
 
   productservice:
     environment:
@@ -15,7 +14,7 @@ services:
       - "80"
 
 
-  userservice:
+  orderservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:

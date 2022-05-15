@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "ServiceUser\UserService.csproj", "{B45D7857-5364-4B20-802E-408DEB234643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "ServiceUser\UserService.csproj", "{B45D7857-5364-4B20-802E-408DEB234643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductService", "ProductService\ProductService.csproj", "{5356ED33-79AF-4942-A66C-9F454CFFDD27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService", "ProductService\ProductService.csproj", "{5356ED33-79AF-4942-A66C-9F454CFFDD27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{C8058F27-1606-4084-B506-E47E7B4F550E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{C8058F27-1606-4084-B506-E47E7B4F550E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessor", "OrderProcessor\OrderProcessor.csproj", "{5AE07CFC-E70D-464B-95C9-59030BE9217E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderProcessor", "OrderProcessor\OrderProcessor.csproj", "{5AE07CFC-E70D-464B-95C9-59030BE9217E}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2D679ACB-610A-4703-A039-1C21F7F48E3F}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3A0B464E-A244-40AA-AD75-F4AAFDBB87C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{5AE07CFC-E70D-464B-95C9-59030BE9217E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AE07CFC-E70D-464B-95C9-59030BE9217E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AE07CFC-E70D-464B-95C9-59030BE9217E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D679ACB-610A-4703-A039-1C21F7F48E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D679ACB-610A-4703-A039-1C21F7F48E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D679ACB-610A-4703-A039-1C21F7F48E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D679ACB-610A-4703-A039-1C21F7F48E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0B464E-A244-40AA-AD75-F4AAFDBB87C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0B464E-A244-40AA-AD75-F4AAFDBB87C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0B464E-A244-40AA-AD75-F4AAFDBB87C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0B464E-A244-40AA-AD75-F4AAFDBB87C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

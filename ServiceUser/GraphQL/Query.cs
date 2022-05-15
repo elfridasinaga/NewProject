@@ -15,7 +15,7 @@ namespace UserService.GraphQL
 {
     public class Query
     {
-        [Authorize(Roles = new[] { "MANAGER" })] // dapat diakses kalau sudah login
+        [Authorize(Roles = new[] { "ADMIN" })] // dapat diakses kalau sudah login
         public IQueryable<UserData> GetUsers([Service] StudyCaseContext context) =>
             context.Users.Select(p => new UserData()
             {

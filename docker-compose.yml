@@ -13,7 +13,6 @@ services:
       - app-tier
   kafka:
     image: docker.io/bitnami/kafka
-    hostname: kafkaserver.local
     ports:
       - "9092:9092"
     links:
@@ -30,13 +29,26 @@ services:
     networks:
       - app-tier
 
-  orderprocessor:
-    image: ${DOCKER_REGISTRY-}orderprocessor
+  userservice:
+    image: ${DOCKER_REGISTRY-}userservice
+    ports:
+      - "8081:80"
     build:
       context: .
-      dockerfile: OrderProcessor/Dockerfile
+      dockerfile: ServiceUser/Dockerfile
     networks:
-      - app-tier
+       - app-tier
+
+  productservice:
+    image: ${DOCKER_REGISTRY-}productservice
+    ports:
+      - "8082:80"
+    build:
+      context: .
+      dockerfile: ProductService/Dockerfile
+    networks:
+       - app-tier
+
 
   orderservice:
     image: ${DOCKER_REGISTRY-}orderservice
@@ -48,29 +60,16 @@ services:
       context: .
       dockerfile: OrderService/Dockerfile
     networks:
-      - app-tier
+       - app-tier
 
 
-  productservice:
-    image: ${DOCKER_REGISTRY-}productservice
-    ports:
-      - "8084:80"
+  orderprocessor:
+    image: ${DOCKER_REGISTRY-}orderprocessor
     build:
       context: .
-      dockerfile: ProductService/Dockerfile
+      dockerfile: OrderProcessor/Dockerfile
     networks:
-      - app-tier
-
-
-  userservice:
-    image: ${DOCKER_REGISTRY-}userservice
-    ports:
-      - "8085:80"
-    build:
-      context: .
-      dockerfile: ServiceUser/Dockerfile
-    networks:
-      - app-tier
+       - app-tier 
 
 networks:
   app-tier:
@@ -81,3 +80,4 @@ volumes:
     driver: local
   kafka_data:
     driver: local
+
