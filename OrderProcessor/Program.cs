@@ -1,8 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Confluent.Kafka;
+using Confluent.Kafka.Admin;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OrderProcessor.Models;
+using System.Net;
 
 Console.WriteLine("Order Processor");
 IConfiguration configuration = new ConfigurationBuilder()
