@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderProcessor.Models
+namespace UserService.Models
 {
     public class OrderData
     {

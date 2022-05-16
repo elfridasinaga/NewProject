@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using UserService.Models;
-using OrderProcessor.GraphQL;
+using UserService.GraphQL;
 
 namespace UserService.GraphQL
 {

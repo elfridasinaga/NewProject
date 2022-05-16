@@ -17,7 +17,7 @@ var config = new ConsumerConfig
 };
 
 //Connect to Kafka
-var topic = "simpleorder";
+var topic = "finalcase";
 CancellationTokenSource cts = new CancellationTokenSource();
 Console.CancelKeyPress += (_, e) =>
 {

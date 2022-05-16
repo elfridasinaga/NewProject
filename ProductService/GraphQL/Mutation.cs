@@ -13,7 +13,7 @@ using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using ProductService.Models;
-using OrderProcessor.GraphQL;
+using ProductService.GraphQL;
 using UserService.Models;
 
 namespace ProductService.GraphQL

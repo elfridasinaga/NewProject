@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using OrderService.GraphQL;
 using OrderService.Models;
 using System.Text;
-using UserService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var conString = builder.Configuration.GetConnectionString("MyDatabase");

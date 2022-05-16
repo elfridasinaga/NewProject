@@ -1,4 +1,4 @@
-﻿namespace UserService.Models
+﻿namespace OrderService.GraphQL
 {
     public class TokenSettings
     {
